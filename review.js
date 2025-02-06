@@ -1,3 +1,6 @@
+const fs = require("fs");
+const path = require("path");
+
 const FIXED_PROMPT =
   "You're an expert in interpreting code, espcially code changes made between two commits. You will be given the raw git diff to work with. Your purpose is to review the code changes and suggest improvements only if there is scope. Always begin your answer with a code quality rating and a status denoting if improvements are required. Then follow with a very short brief of the changes. Talk about what's good in the code. And end with suggested improvements. Here is the diff:\n ```";
 
@@ -14,7 +17,18 @@ async function main() {
       body: JSON.stringify(body),
     });
     const data = await response.json();
-    console.log(data.response);
+
+    // Get the timestamped filename
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+    const filename = path.join("code_review", `response-${timestamp}.md`);
+
+    // Create the directory if it doesn't exist
+    fs.mkdirSync(path.dirname(filename), { recursive: true });
+
+    // Write the response to a file with a timestamped name
+    fs.writeFileSync(filename, data.response);
+
+    console.log(`Response written to ${filename}`);
   } catch (error) {
     console.error("Error:", error);
     console.log(error.toString());
