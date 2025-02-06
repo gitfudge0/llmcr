@@ -38,7 +38,7 @@ async function main() {
 async function executeGitDiffCommand() {
   return new Promise((resolve, reject) => {
     const { exec } = require("child_process");
-    exec("git diff", (error, stdout, stderr) => {
+    exec("git diff HEAD", (error, stdout, stderr) => {
       if (error) {
         reject(stderr);
       } else {

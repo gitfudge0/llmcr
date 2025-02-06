@@ -1,6 +1,6 @@
-# Pre-commit Code Review scripts
+# LLM Code Review scripts
 
-This code is a Node.js script designed to automate the process of reviewing code changes between two commits using an AI language model. Use your desired methods to trigger the script in your pre-commit hook.
+This script is designed to automate the process of reviewing code changes between two commits BEFORE pushing to remote using a local AI language model. Use your desired methods to trigger the script in your pre-commit hook.
 
 ## Usage
 
