@@ -11,4 +11,20 @@ To use this tool:
 - Execute the script with `node review.js` or get it executed via the pre-commit hook
 - Check the `code_review` directory
 
-This script is a useful starting point for automating code reviews but can be extended and improved further based on specific needs.
+Add a pre-commit hook to your repository to automate checks before you commit your code. Here’s how you can do it:
+
+1. Create a new file named `pre-commit` in the `.git/hooks` directory and make it an executable:
+
+   ```bash
+   touch .git/hooks/pre-commit
+   chmod +x .git/hooks/pre-commit
+   ```
+
+2. Add the following content to the `pre-commit` file. This example script will run `npm test` before you commit:
+
+   ```bash
+   #!/bin/sh
+   echo "Generating code review..."
+   npm review.js
+
+   ```
